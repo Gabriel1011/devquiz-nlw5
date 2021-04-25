@@ -1,4 +1,4 @@
-import 'package:DevQuiz/challenge/widgets/awnser/awnser_widget.dart';
+import 'package:DevQuiz/Pages/challenge/widgets/awnser/awnser_widget.dart';
 import 'package:DevQuiz/core/app_text_styles.dart';
 import 'package:DevQuiz/shared/models/question_model.dart';
 import 'package:flutter/material.dart';

@@ -4,10 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LevelButtonWidget extends StatelessWidget {
   final String label;
+  final VoidCallback onTap;
 
   LevelButtonWidget({
     Key? key,
     required this.label,
+    required this.onTap,
   })   : assert(["Fácil", "Médio", "Díficil", "Perito"].contains(label)),
         super(key: key);
 
@@ -40,28 +42,31 @@ class LevelButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 26,
-          vertical: 6,
-        ),
-        child: Text(
-          label,
-          style: GoogleFonts.notoSans(
-            color: fontColor,
-            fontSize: 13,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 26,
+            vertical: 6,
+          ),
+          child: Text(
+            label,
+            style: GoogleFonts.notoSans(
+              color: fontColor,
+              fontSize: 13,
+            ),
           ),
         ),
-      ),
-      decoration: BoxDecoration(
-        color: color,
-        border: Border.fromBorderSide(
-          BorderSide(
-            color: borderColor,
+        decoration: BoxDecoration(
+          color: color,
+          border: Border.fromBorderSide(
+            BorderSide(
+              color: borderColor,
+            ),
           ),
+          borderRadius: BorderRadius.circular(28),
         ),
-        borderRadius: BorderRadius.circular(28),
       ),
     );
   }

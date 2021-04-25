@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:DevQuiz/challenge/widgets/next_button/next_button_widget.dart';
+import 'package:DevQuiz/Pages/challenge/widgets/next_button/next_button_widget.dart';
 import 'package:DevQuiz/core/app_images.dart';
 import 'package:DevQuiz/core/app_text_styles.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
+import 'package:DevQuiz/Pages/home/home_page.dart';
 import 'package:DevQuiz/core/core.dart';
-import 'package:DevQuiz/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatelessWidget {

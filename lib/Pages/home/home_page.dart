@@ -1,9 +1,10 @@
-import 'package:DevQuiz/challenge/challenge_page.dart';
+import 'package:DevQuiz/Pages/challenge/challenge_page.dart';
+import 'package:DevQuiz/Pages/home/home_state.dart';
+import 'package:DevQuiz/Pages/home/widgets/appbar/appbar_widget.dart';
+import 'package:DevQuiz/Pages/home/widgets/level_button/level_button_widget.dart';
+import 'package:DevQuiz/Pages/home/widgets/quiz_card/quiz_card_widget.dart';
 import 'package:DevQuiz/core/app_colors.dart';
-import 'package:DevQuiz/home/home_state.dart';
-import 'package:DevQuiz/home/widgets/appbar/appbar_widget.dart';
-import 'package:DevQuiz/home/widgets/level_button/level_button_widget.dart';
-import 'package:DevQuiz/home/widgets/quiz_card/quiz_card_widget.dart';
+import 'package:DevQuiz/shared/models/quiz_model.dart';
 import 'package:flutter/material.dart';
 
 import 'home_controller.dart';
@@ -22,6 +23,10 @@ class _HomePageState extends State<HomePage> {
 
     controller.getUser();
     controller.getQuizzes();
+
+    controller.quizzesNotifier.addListener(() {
+      setState(() {});
+    });
 
     controller.stateNotifier.addListener(() {
       setState(() {});
@@ -56,10 +61,26 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                LevelButtonWidget(label: "Fácil"),
-                LevelButtonWidget(label: "Médio"),
-                LevelButtonWidget(label: "Díficil"),
-                LevelButtonWidget(label: "Perito"),
+                LevelButtonWidget(
+                    label: "Fácil",
+                    onTap: () {
+                      controller.filterQuisse(Level.facil);
+                    }),
+                LevelButtonWidget(
+                    label: "Médio",
+                    onTap: () {
+                      controller.filterQuisse(Level.medio);
+                    }),
+                LevelButtonWidget(
+                    label: "Díficil",
+                    onTap: () {
+                      controller.filterQuisse(Level.dificil);
+                    }),
+                LevelButtonWidget(
+                    label: "Perito",
+                    onTap: () {
+                      controller.filterQuisse(Level.perito);
+                    }),
               ],
             ),
           ),
