@@ -1,3 +1,4 @@
+import 'package:DevQuiz/result/result_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:DevQuiz/challenge/challenge_controller.dart';
@@ -8,10 +9,12 @@ import 'package:DevQuiz/shared/models/question_model.dart';
 
 class ChallengePage extends StatefulWidget {
   final List<QuestionModel> questions;
+  final String title;
 
   ChallengePage({
     Key? key,
     required this.questions,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -37,6 +40,12 @@ class _ChallengePageState extends State<ChallengePage> {
           curve: Curves.linear,
         )
       : null;
+
+  void onSelected(bool value) {
+    if (value) controller.awnserRight++;
+
+    nextPage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,16 +79,14 @@ class _ChallengePageState extends State<ChallengePage> {
             .map(
               (question) => QuizWidget(
                 question: question,
-                onChange: () {
-                  nextPage();
-                },
+                onSelected: onSelected,
               ),
             )
             .toList(),
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: ValueListenableBuilder(
             valueListenable: controller.currentPageNotifier,
             builder: (context, value, _) => Row(
@@ -88,9 +95,7 @@ class _ChallengePageState extends State<ChallengePage> {
                   Expanded(
                     child: NextButtonWidget.white(
                       label: "Pular",
-                      onTap: () {
-                        nextPage();
-                      },
+                      onTap: nextPage,
                     ),
                   ),
                 if (value == widget.questions.length)
@@ -98,7 +103,16 @@ class _ChallengePageState extends State<ChallengePage> {
                     child: NextButtonWidget.green(
                       label: "Finalizar",
                       onTap: () {
-                        Navigator.pop(context);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ResultPage(
+                              title: widget.title,
+                              length: widget.questions.length,
+                              lenghtIsRight: controller.awnserRight,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
